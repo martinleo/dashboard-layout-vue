@@ -1,0 +1,35 @@
+{
+  "name": "dashboard-layout-vue",
+  "version": "0.0.3",
+  "type":"module",
+  "files": ["dist"],
+  "main": "./dist/dashboard-layout-vue.umd.js",
+  "module": "./dist/dashboard-layout-vue.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/dashboard-layout-vue.js"
+    },
+    "./styles.css": "./dist/style.css"
+  },
+  "private": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "color": "^4.2.3"    
+  },
+  "devDependencies": {
+    "vue": "^3.2.45",
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "sass": "^1.58.0",
+    "vite": "^4.0.0"
+  }
+}
