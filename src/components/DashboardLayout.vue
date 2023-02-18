@@ -8,13 +8,12 @@ import color from 'color';
 
 
 // Component setup
-const emit = defineEmits(["sidebarToggle"]);
+const emit = defineEmits(["sidebarToggle","buttonClicked"]);
 const props = defineProps({
   menu: {
     type: Array,
     default: dummyMenu
   },
-  routerInstance: Object,
   mobileBreakpoint: {
     type: Number,
     default: 1024
@@ -37,10 +36,13 @@ const props = defineProps({
   },
   sidebarWidth: {
     type: String,
-    default: '15rem'
+    default: '16rem'
+  },
+  currentRoute: {
+    type: String,
+    default: ''
   }
 });
-
 
 // Common color transformations
 const backgroundShade = computed(() => color(props.backgroundColor).lighten(props.contentBackgroundShade).hex()); // For content and sidebar child items blocks
@@ -52,6 +54,10 @@ const sidebarOpen = ref(null);
 
 function toggleSidebar() {
   sidebarOpen.value = !sidebarOpen.value;
+}
+
+function handleButtonClicked(pageTo) {
+  emit("buttonClicked",pageTo)
 }
 
 
@@ -92,7 +98,9 @@ onUnmounted(() => {
       :fontColor="props.fontColor"
       :backgroundShade="backgroundShade"
       :boxShadowColor="boxShadowColor"
-      @sidebarToggle="toggleSidebar" 
+      :currentRoute="props.currentRoute"
+      @sidebarToggle="toggleSidebar"
+      @buttonClicked="handleButtonClicked" 
       >
       <slot name="sidebar-logo" />
     </Sidebar>
@@ -116,27 +124,37 @@ $backgroundShade: v-bind(backgroundShade);
 $fontColor: v-bind(fontColor);
 $sidebarWidth: v-bind(sidebarWidth);
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 .layout-container{
   background-color: backgroundShade;
   height: 100vh;
   overflow: hidden;
   width: 100vw;  
-
-  & * {
-    color: $fontColor;
-    font-family: 'Montserrat';
-  }
   
   // Begin reset
-  & * {
-    box-sizing: border-box;
-  }
-
-  & *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-
   & h1,
   h2,
   h3,
@@ -148,7 +166,6 @@ $sidebarWidth: v-bind(sidebarWidth);
   ul {
     margin: 0;
     padding: 0;
-    font-weight: normal;
   }
 
   & ol,

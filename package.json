@@ -1,6 +1,8 @@
 {
   "name": "dashboard-layout-vue",
-  "version": "0.0.3",
+  "version": "0.0.5",
+  "description": "A simple dashboard layout for Vue",
+  "keywords": ["dashboard", "layout", "vue", "admin", "sidebar", "responsive"],
   "type":"module",
   "files": ["dist"],
   "main": "./dist/dashboard-layout-vue.umd.js",
@@ -10,6 +12,10 @@
       "import": "./dist/dashboard-layout-vue.js"
     },
     "./styles.css": "./dist/style.css"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/martinleo/dashboard-layout-vue"
   },
   "private": false,
   "scripts": {

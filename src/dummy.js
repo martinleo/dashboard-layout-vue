@@ -1,63 +1,39 @@
 export const dummyMenu = [
   {
-    section: "Expenses",
+    section: "Section 1",
     options: [
       {
-        id: 'dashboard',
-        displayText: "Dashboard",
-        to: "/app/dashboard",
+        id: 'option-1',
+        displayText: "Option 1",
+        to: "/app/option1",
         ionIcon: "pie-chart-outline"
       },
       {
-        id: 'expenses',
-        displayText: "Expenses",
-        to: "/app/expenses",
-        ionIcon: "reader-outline"
-      },
-      {
-        id: 'test-child',
-        displayText: "Test Child",
+        id: 'option-child',
+        displayText: "Option w/ children",
         ionIcon: "chatbubbles-outline",
         children: [
-          { id: 'categories', displayText: "Categories", to: "/app/categories", ionIcon: "pricetag-outline" },
+          { id: 'child-1', displayText: "One child", to: "/app/child", ionIcon: "flask-outline" },
+          { id: 'child-2', displayText: "Another child", to: "/app/child", ionIcon: "pricetag-outline" },
         ],
       },
       {
-        id: 'dashboard',
-        displayText: "Dashboard",
-        to: "/app/dashboard",
-        ionIcon: "pie-chart-outline"
-      },
-      {
-        id: 'dashboard',
-        displayText: "Dashboard",
-        to: "/app/dashboard",
-        ionIcon: "pie-chart-outline"
-      },
-      {
-        id: 'dashboard',
-        displayText: "Dashboard",
-        to: "/app/dashboard",
-        ionIcon: "pie-chart-outline"
-      },
-    ],
+        id: 'option-2',
+        displayText: "Option 2",
+        to: "/app/option2",
+        ionIcon: "flash-outline"
+      }    
+    ]
   },
   {
-    section: "Options",
+    section: "Section 2",
     options: [
       {
-        id: 'options',
-        displayText: "Options",
-        ionIcon: "cog-outline",
-        children: [
-          { id: 'categories', displayText: "Categories", to: "/app/categories", ionIcon: "pricetag-outline" },
-        ],
-      },
-      {
-        id: 'example',
-        displayText: "Example",
-        to: "/app/example"
-      },
-    ],
+        id: 'option-3',
+        displayText: "Option 3",
+        to: "/app/option3",
+        ionIcon: "fish-outline"
+      }      
+    ]
   },
-];
+]

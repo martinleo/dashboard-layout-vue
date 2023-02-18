@@ -1,14 +1,14 @@
 <script setup>
 import { ref, computed } from "vue";
 import color from 'color';
-//import { useRouter, useRoute } from "vue-router";
 
 // Component setup
-const emit = defineEmits(["sidebarToggle"]);
+const emit = defineEmits(["sidebarToggle","buttonClicked"]);
 const props = defineProps({
   backgroundShade: String,
   boxShadowColor: String,
   bgColor: String,
+  currentRoute: String,
   fontColor: String,
   isMobile: Boolean,
   menuItems: {
@@ -16,9 +16,7 @@ const props = defineProps({
     required: true,
   },
   sidebarOpen: Boolean,  
-  primaryColor: String,  
-  useRouteInstance: Object,
-  useRouterInstance: Object,
+  primaryColor: String,
   width: String
 });
 
@@ -37,12 +35,12 @@ function toggleSidebar() {
 
 // Sidebar - Menu
 const activeRoute = computed(() => {
-  if(props.useRouteInstance) return props.useRouteInstance.path.startsWith(item.to)
-  else return '/app/expenses' 
+  if(props.currentRoute) return props.currentRoute
+  else return '/app/option1' 
 })
 
 function handleListItemClick(pageTo) {
-  if(props.useRouterInstance) props.useRouterInstance.push({ path: pageTo });
+  emit("buttonClicked",pageTo)
   props.isMobile && emit("sidebarToggle"); // Close sidebar if mobile size
 }
 
@@ -97,6 +95,7 @@ $activeButtonGlowColor: v-bind(activeButtonGlowColor);
 $backgroundShade: v-bind(backgroundShade);
 $bgColor: v-bind(bgColor);
 $boxShadowColor: v-bind(boxShadowColor);
+$fontColor: v-bind(fontColor);
 $optionsBlockTitleColor: v-bind(optionsBlockTitleColor);
 $primaryColor: v-bind(primaryColor);
 $sidebarWidth: v-bind(width);
@@ -106,7 +105,7 @@ $sidebarWidth: v-bind(width);
   background: $bgColor;
   box-shadow: 0 4px 15px 0 $boxShadowColor;
   height: 100%;
-  position: fixed;
+  position: absolute;
   overflow: hidden;
   transition: transform 0.3s;
   width: $sidebarWidth;
@@ -114,6 +113,10 @@ $sidebarWidth: v-bind(width);
 
   &.sidebar--closed {
     transform: translateX(-250px);
+  }
+
+  & *{
+    color: $fontColor;
   }
 }
 
@@ -161,7 +164,10 @@ $sidebarWidth: v-bind(width);
   display: flex;
   cursor: pointer;
   height: 100%;
-  padding: 0.625rem;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.75rem;
   transition: 0.15s padding ease-out;
   width: 100%;
 }
@@ -183,14 +189,16 @@ $sidebarWidth: v-bind(width);
 .menu-button__active {
   @extend .menu-button__base;
   background: $primaryColor;
-  //box-shadow: 0 0 10px 1px rgba($primaryColor, 60%);
   box-shadow: 0 0 5px 1px $activeButtonGlowColor;
   border-radius: 4px;
-  padding: 0.6rem;
 
   & * {
     color: #f7f7f7;
     font-weight: 600;
+  }
+
+  ion-icon{
+    --ionicon-stroke-width: 48px;
   }
 }
 
@@ -200,8 +208,6 @@ $sidebarWidth: v-bind(width);
 
 .menu-button__text {
   flex: 1 1 auto;
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .menu-button__chevron {
