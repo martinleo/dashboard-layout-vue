@@ -73,7 +73,7 @@ const currentRoute = computed(() => route.path)
 | `contentBackgroundShade` | Shading percentage for content container | `-0.05` |
 | `currentRoute` | The current route from the `useRoute()` object | `'/app/option1'` |
 | `primaryColor` | Brand color | `'#4361ee'` |
-| `fontColor` | Font color | `'#4361ee'` |
+| `fontColor` | Font color | `'#494c5c'` |
 | `sidebarWidth` | Width of the sidebar | `'16rem'` |
 
 
