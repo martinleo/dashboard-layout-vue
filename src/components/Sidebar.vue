@@ -10,6 +10,7 @@ const props = defineProps({
   bgColor: String,
   currentRoute: String,
   fontColor: String,
+  iconSize: String,
   isMobile: Boolean,
   menuItems: {
     type: Array,
@@ -27,6 +28,8 @@ const optionsBlockTitleColor = computed(() => {
 }); //For options block titles
 
 const activeButtonGlowColor = computed(() => color(props.primaryColor).alpha(0.6).hexa()); //For options block titles
+
+const selectedChildOptionBg = computed(() => color(props.primaryColor).alpha(0.1).hexa()); //For options block titles
 
 // Sidebar
 function toggleSidebar() {
@@ -66,7 +69,12 @@ function handleListItemClick(pageTo) {
                   <ion-icon class="menu-button__chevron" name="chevron-forward-outline" />
                 </label>
                 <ul v-if="item.children && item.children.length > 0" class="suboptions-block">
-                  <li v-for="child in item.children" :key="child.displayText" class="menu-button" @click="handleListItemClick(child.to)">
+                  <li 
+                    v-for="child in item.children"
+                    :key="child.displayText"
+                    :class="[activeRoute == child.to ? 'child-menu-button__active' : 'menu-button',]" 
+                    @click="handleListItemClick(child.to)"
+                  >
                     <ion-icon v-if="child.ionIcon" class="menu-button__icon" :name="child.ionIcon" />
                     <p class="menu-button__text">{{ child.displayText }}</p>
                   </li>
@@ -96,9 +104,15 @@ $backgroundShade: v-bind(backgroundShade);
 $bgColor: v-bind(bgColor);
 $boxShadowColor: v-bind(boxShadowColor);
 $fontColor: v-bind(fontColor);
+$iconSize: v-bind(iconSize);
 $optionsBlockTitleColor: v-bind(optionsBlockTitleColor);
 $primaryColor: v-bind(primaryColor);
 $sidebarWidth: v-bind(width);
+$selectedChildOptionBg: v-bind(selectedChildOptionBg);
+
+ion-icon {
+  font-size: $iconSize;
+}
 
 /* Sidebar */
 .sidebar {
@@ -157,6 +171,11 @@ $sidebarWidth: v-bind(width);
 .menu-button-wrapper{
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+
+
+  &:not(:last-child){
+    margin-bottom: 0.3rem;
+  }
 }
 
 .menu-button__base {
@@ -165,15 +184,14 @@ $sidebarWidth: v-bind(width);
   cursor: pointer;
   height: 100%;
   padding: 0.5rem;
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
-  line-height: 1.75rem;
+  line-height: 1.5rem;
   transition: 0.15s padding ease-out;
   width: 100%;
 }
 
 .suboptions-container {
   @extend .menu-button__base;
+  margin: 0rem;
   padding: 0px;
   flex-direction: column;
 }
@@ -214,6 +232,11 @@ $sidebarWidth: v-bind(width);
   flex: 0 0 1;
   font-size: 1.125rem;
   transition: transform 0.25s ease;
+}
+
+.child-menu-button__active{
+  @extend .menu-button;
+  background-color: $selectedChildOptionBg;
 }
 
 .suboptions-toggle {

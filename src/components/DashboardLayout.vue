@@ -41,7 +41,11 @@ const props = defineProps({
   currentRoute: {
     type: String,
     default: ''
-  }
+  },
+  iconSize: {
+    type: String,
+    default: '18px'
+  },
 });
 
 // Common color transformations
@@ -99,6 +103,7 @@ onUnmounted(() => {
       :backgroundShade="backgroundShade"
       :boxShadowColor="boxShadowColor"
       :currentRoute="props.currentRoute"
+      :iconSize="props.iconSize"
       @sidebarToggle="toggleSidebar"
       @buttonClicked="handleButtonClicked" 
       >

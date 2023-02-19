@@ -75,6 +75,7 @@ const currentRoute = computed(() => route.path)
 | `primaryColor` | Brand color | `'#4361ee'` |
 | `fontColor` | Font color | `'#494c5c'` |
 | `sidebarWidth` | Width of the sidebar | `'16rem'` |
+| `iconSize` | Font color | `'18px'` |
 
 
 Example menu
