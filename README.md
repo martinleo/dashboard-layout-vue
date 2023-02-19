@@ -1,5 +1,5 @@
 # dashboard-layout-vue
-Responsive basic layout for admin dashboards.
+Vue 3 basic responsive layout for admin dashboards.
 ![Fullscreen](./img/1.jpg)
 ![Mobile](./img/2.jpg)
 
@@ -17,6 +17,20 @@ Requires
 ```html
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+```
+
+2. Include in `main.js`
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+import DashboardLayout from 'dashboard-layout-vue' // <-- This
+import 'dashboard-layout-vue/styles.css' // <-- This
+
+const app = createApp(App);
+app.use(DashboardLayout) // <-- This
+
+app.mount('#app')
+
 ```
 
 # Example usage
@@ -58,7 +72,7 @@ const currentRoute = computed(() => route.path)
 | `contentBackgroundShade` | Shading percentage for content container | `-0.05` |
 | `currentRoute` | The current route from the `useRoute()` object | `'/app/option1'` |
 | `primaryColor` | Brand color | `'#4361ee'` |
-| `fontColor` | Font color | `'#4361ee'` |
+| `fontColor` | Font color | `'#494c5c'` |
 | `sidebarWidth` | Width of the sidebar | `'16rem'` |
 
 
@@ -69,29 +83,36 @@ Example menu
     section: "Section 1",
     options: [
       {
-        id: 'option1',
+        id: 'option-1',
         displayText: "Option 1",
         to: "/app/option1",
         ionIcon: "pie-chart-outline"
       },
       {
         id: 'option-child',
-        displayText: "Option With Child",
+        displayText: "Option w/ children",
         ionIcon: "chatbubbles-outline",
         children: [
-          { id: 'child', displayText: "Child Option", to: "/app/child", ionIcon: "pricetag-outline" },
+          { id: 'child-1', displayText: "One child", to: "/app/child", ionIcon: "flask-outline" },
+          { id: 'child-2', displayText: "Another child", to: "/app/child", ionIcon: "pricetag-outline" },
         ],
       },
+      {
+        id: 'option-2',
+        displayText: "Option 2",
+        to: "/app/option2",
+        ionIcon: "flash-outline"
+      }    
     ]
   },
   {
     section: "Section 2",
     options: [
       {
-        id: 'option2',
-        displayText: "Option 2",
-        to: "/app/option2",
-        ionIcon: "pie-chart-outline"
+        id: 'option-3',
+        displayText: "Option 3",
+        to: "/app/option3",
+        ionIcon: "fish-outline"
       }      
     ]
   },
