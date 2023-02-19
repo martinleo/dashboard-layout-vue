@@ -19,6 +19,21 @@ Requires
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 ```
 
+2. Include in `main.js`
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+import DashboardLayout from 'dashboard-layout-vue' // <-- This
+import 'dashboard-layout-vue/styles.css' // <-- This
+
+const app = createApp(App);
+app.use(DashboardLayout) // <-- This
+
+app.mount('#app')
+
+```
+
+
 # Example usage
 ```html
 <script setup>
