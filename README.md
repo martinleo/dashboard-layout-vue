@@ -1,5 +1,5 @@
 # dashboard-layout-vue
-Responsive basic layout for admin dashboards.
+Vue 3 basic responsive layout for admin dashboards.
 ![Fullscreen](./img/1.jpg)
 ![Mobile](./img/2.jpg)
 
