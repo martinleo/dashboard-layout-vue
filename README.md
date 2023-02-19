@@ -8,15 +8,45 @@ Responsive basic layout for admin dashboards.
 > Work in progress  
 > I probably won't be looking at issues, but you're free to fork and modify as you wish.
 
-# Requires
+# Setup
+Requires
 - Vue 3
 - IonIcons
 
-# Setup
 1. Add IonIcons [as described on their website](https://ionic.io/ionicons/usage). Example:
 ```html
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+```
+
+# Example usage
+```html
+<script setup>
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
+
+function handleClick(pageTo){
+  router.push({ path: pageTo})
+}
+
+const currentRoute = computed(() => route.path)
+
+</script>
+
+<template>
+  <DashboardLayout primaryColor="#E91E63" @buttonClicked="handleClick" :currentRoute="currentRoute">
+    <template v-slot:sidebar-logo>
+      <div class="logo">My Logo</div>
+    </template>
+    <template v-slot:header>
+      Something in the header
+    </template>
+    <template v-slot:content>
+    </template>    
+  </DashboardLayout>
+</template>
 ```
 
 # Props
@@ -75,35 +105,7 @@ Example menu
 | `content` | |
 | `sidebar-logo` | |
 
-Example
-```html
-<script setup>
-import { computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-const router = useRouter()
-const route = useRoute()
 
-function handleClick(pageTo){
-  router.push({ path: pageTo})
-}
-
-const currentRoute = computed(() => route.path)
-
-</script>
-
-<template>
-  <DashboardLayout primaryColor="#E91E63" @buttonClicked="handleClick" :currentRoute="currentRoute">
-    <template v-slot:sidebar-logo>
-      <div class="logo">My Logo</div>
-    </template>
-    <template v-slot:header>
-      Something in the header
-    </template>
-    <template v-slot:content>
-    </template>    
-  </DashboardLayout>
-</template>
-```
 
 # Events
 | Event | Description | Example Payload |
