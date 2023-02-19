@@ -33,7 +33,6 @@ app.mount('#app')
 
 ```
 
-
 # Example usage
 ```html
 <script setup>
